@@ -40,6 +40,19 @@ img {
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  animation: opaque 0.8s;
+}
+.phrase,
+.lol {
+  animation: opaque 0.8s;
+}
+@keyframes opaque {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .app_icons {

@@ -13,6 +13,8 @@ export const initialState = {
   items: [],
   isEdit: false,
   isLoading: false,
+  user: [],
+  errorMessage: "",
 };
 
 export const itemReducer = (state = initialState, action) => {
@@ -37,6 +39,11 @@ export const itemReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: action.payload,
+      };
+    case "ERROR":
+      return {
+        ...state,
+        errorMessage: action.payload,
       };
     case "EDIT":
       return {
@@ -84,6 +91,15 @@ export const itemReducer = (state = initialState, action) => {
         country: "",
         image: "",
         isEdit: false,
+      };
+    case "SET_USER":
+      // console.log(action.payload.results, "action.payload");
+      // return { ...state, user: action.payload.results };
+      const { user } = action;
+      return {
+        ...state,
+        items: [...user, ...state.items],
+        isLoading: false,
       };
     default:
       return state;

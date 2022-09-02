@@ -10,7 +10,7 @@ const EditItem = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.totalItems);
   const handleChange = (e) => {
-    dispatch(inputChange({ name: e.target.name, value: e.target.value }));
+    dispatch(inputChange({ [e.target.name]: e.target.value }));
   };
   const clear = () => {
     store.dispatch(clearForm());

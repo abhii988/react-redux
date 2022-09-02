@@ -2,7 +2,13 @@ import React, { Fragment, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./shop.css";
-import { deleteItem, edit, fetchData, dataLoader } from "../redux/actions";
+import {
+  deleteItem,
+  edit,
+  dataLoader,
+  getUser,
+  errors,
+} from "../redux/actions";
 import { store } from "../redux/store";
 import { Table, Button } from "react-bootstrap";
 import ReactPaginate from "react-paginate";
@@ -10,21 +16,21 @@ import DeleteConfirmation from "./DeleteConfirmation";
 import Count from "./Count";
 //https://picsum.photos/500?random=1
 
-const Shop = ({ error, setError }) => {
+const Shop = () => {
   const navigate = useNavigate();
   const data = useSelector((state) => state.totalItems);
   const add = () => {
     navigate("/shop/add");
   };
+  // console.log(data, "data");
   const [activeLink, setActiveLink] = useState();
   const fetchButton = () => {
-    setError(null);
-    store.dispatch(fetchData()).catch((err) => {
-      setError(err.message);
-      store.dispatch(dataLoader(false));
-    });
+    store.dispatch(errors(null));
+    store.dispatch(getUser());
+    // store.dispatch(fetchData()).catch((err) => {
+    //   setError(err.message);
+    // });
     store.dispatch(dataLoader(true));
-    // setError("");
   };
   const handleDelete = (id) => {
     store.dispatch(deleteItem({ id: id }));
@@ -57,7 +63,7 @@ const Shop = ({ error, setError }) => {
       `My address is ${user.city}, ${user.country}.`,
       `My username is "${user.username}" & password is "${user.password}".`,
     ];
-    return <h3>{phrases[activeLink]}</h3>;
+    return <h3 className="phrase">{phrases[activeLink]}</h3>;
   };
   //Delete Confirmation Code:
   const [show, setShow] = useState(false);
@@ -131,7 +137,7 @@ const Shop = ({ error, setError }) => {
           />
         </div>
       </div>
-      {error === null ? (
+      {data.errorMessage === null ? (
         <div>
           {data.items.length > 0 ? (
             <div>
@@ -165,7 +171,7 @@ const Shop = ({ error, setError }) => {
               )}
               <br />
               <hr />
-              <Table striped hover variant="success">
+              <Table striped hover variant="success" className="lol">
                 <thead>
                   <tr>
                     <th>S.No.</th>
@@ -284,7 +290,9 @@ const Shop = ({ error, setError }) => {
           )}
         </div>
       ) : (
-        <h1 style={{ textAlign: "centre", display: "block" }}>{error}</h1>
+        <h1 style={{ textAlign: "centre", display: "block" }}>
+          {data.errorMessage}
+        </h1>
       )}
     </div>
   );
