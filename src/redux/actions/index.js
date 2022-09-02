@@ -68,9 +68,9 @@ export const dataLoader = (data) => ({
 export const getUser = () => ({
   type: GET_USER,
 });
-export const setUser = (user) => ({
+export const setUser = (data) => ({
   type: SET_USER,
-  user,
+  payload: data,
 });
 export const errors = (data) => ({
   type: "ERROR",

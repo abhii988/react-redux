@@ -95,10 +95,9 @@ export const itemReducer = (state = initialState, action) => {
     case "SET_USER":
       // console.log(action.payload.results, "action.payload");
       // return { ...state, user: action.payload.results };
-      const { user } = action;
       return {
         ...state,
-        items: [...user, ...state.items],
+        items: [...action.payload, ...state.items],
         isLoading: false,
       };
     default:
