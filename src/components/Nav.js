@@ -11,20 +11,20 @@ const Nav = ({ Logout }) => {
   return (
     <>
       <nav>
-        <NavLink activeClassName="active" style={navStyle} to="/">
+        <NavLink activeclassname="active" style={navStyle} to="/">
           <h3>Logo</h3>
         </NavLink>
         <ul className="nav-links">
-          <NavLink activeClassName="active" style={navStyle} to="/about">
+          <NavLink activeclassname="active" style={navStyle} to="/about">
             <li>About Page</li>
           </NavLink>
-          <NavLink activeClassName="active" style={navStyle} to="/shop">
+          <NavLink activeclassname="active" style={navStyle} to="/shop">
             <li>Users Page</li>
           </NavLink>
-          <NavLink activeClassName="active" style={navStyle} to={`/dashboard`}>
+          <NavLink activeclassname="active" style={navStyle} to={`/dashboard`}>
             <li>Dashboard</li>
           </NavLink>
-          <NavLink activeClassName="active" style={navStyle} to={`/profile`}>
+          <NavLink activeclassname="active" style={navStyle} to={`/profile`}>
             <li>Profile</li>
           </NavLink>
           <li>
